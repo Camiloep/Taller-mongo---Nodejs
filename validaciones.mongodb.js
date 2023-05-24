@@ -8,9 +8,9 @@ db.createCollection("proveedor", {
   validator: {
     $jsonSchema: {
       bsonType: "object",
-      required: ["id_Proveedor","nit", "nombre", "telefono", "email", "direccion", "estado"],
+      required: ["id_Proveedor", "nit", "nombre", "telefono", "email", "direccion", "estado"],
       properties: {
-        id_Proveedor:{
+        id_Proveedor: {
           bsonType: "string",
           description: "Id del proveedor. Debe ser tipo entero"
         },
@@ -64,9 +64,9 @@ db.createCollection("producto", {
   validator: {
     $jsonSchema: {
       bsonType: "object",
-      required: ["id_Producto","nombre", "precio", "cantidad", "estado"],
+      required: ["id_Producto", "nombre", "precio", "cantidad", "estado"],
       properties: {
-        id_Producto:{
+        id_Producto: {
           bsonType: "string",
           description: "Id del producto. Debe ser tipo string"
         },
@@ -90,8 +90,105 @@ db.createCollection("producto", {
           bsonType: 'string',
           description: 'Llave foranea de Id proveedor'
         }
-            }
-          },
+      }
+    },
+  }
+}
+)
+
+db.createCollection("producto", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["id_Producto", "nombre", "precio", "cantidad", "estado"],
+      properties: {
+        id_Producto: {
+          bsonType: "string",
+          description: "Id del producto. Debe ser tipo string"
+        },
+        nombre: {
+          bsonType: "string",
+          description: "Nombre del producto, Debe ser string"
+        },
+        precio: {
+          bsonType: "string",
+          description: "Precio del producto, Debe ser tipo string"
+        },
+        cantidad: {
+          bsonType: "string",
+          description: "Cantidad de productos, Debe ser tipo string"
+        },
+        estado: {
+          bsonType: "bool",
+          description: "Estado del producto, Tipo booleano(TRUE-FALSE)"
+        },
+        fk_Proveedor: {
+          bsonType: 'string',
+          description: 'Llave foranea de Id proveedor'
         }
       }
+    },
+  }
+}
+)
+
+use('prueba')
+db.createCollection("compra", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["id_Compra", "fecha", "total", "estado"],
+      properties: {
+        id_Compra: {
+          bsonType: "string",
+          description: "Id del producto. Debe ser tipo string"
+        },
+        fecha: {
+          bsonType: "string",
+          description: "Nombre del producto, Debe ser string"
+        },
+        total: {
+          bsonType: "string",
+          description: "Precio del producto, Debe ser tipo string"
+        },
+        estado: {
+          bsonType: "bool",
+          description: "Estado del producto, Tipo booleano(TRUE-FALSE)"
+        },
+      }
+    },
+  }
+}
+)
+
+db.createCollection("detalle_compra", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["id_Detalle_Compra", "cantidad", "subtotal", "id_Compra","id_Producto"],
+      properties: {
+        id_Detalle_Compra: {
+          bsonType: "string",
+          description: "Id de detalle de compra. Debe ser tipo string"
+        },
+        cantidad: {
+          bsonType: "string",
+          description: "Nombre del producto, Debe ser string"
+        },
+        subtotal: {
+          bsonType: "string",
+          description: "Precio del producto, Debe ser tipo string"
+        },
+        id_Compra: {
+          bsonType: "string",
+          description: "Id de la compra. Debe ser tipo string"
+        },
+        id_Producto: {
+          bsonType: "string",
+          description: "Id del producto. Debe ser tipo string"
+        }
+      }
+    },
+  }
+}
 )

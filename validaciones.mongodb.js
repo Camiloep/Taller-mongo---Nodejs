@@ -144,7 +144,7 @@ db.createCollection("compra", {
           description: "Id del producto. Debe ser tipo string"
         },
         fecha: {
-          bsonType: "string",
+          bsonType: "date",
           description: "Nombre del producto, Debe ser string"
         },
         total: {
@@ -161,11 +161,12 @@ db.createCollection("compra", {
 }
 )
 
+use('prueba')
 db.createCollection("detalle_compra", {
   validator: {
     $jsonSchema: {
       bsonType: "object",
-      required: ["id_Detalle_Compra", "cantidad", "subtotal", "id_Compra","id_Producto"],
+      required: ["id_Detalle_Compra", "cantidad", "subtotal", "fk_Compra","fk_Producto"],
       properties: {
         id_Detalle_Compra: {
           bsonType: "string",
@@ -173,17 +174,17 @@ db.createCollection("detalle_compra", {
         },
         cantidad: {
           bsonType: "string",
-          description: "Nombre del producto, Debe ser string"
+          description: "Cantidad del producto, Debe ser string"
         },
         subtotal: {
           bsonType: "string",
           description: "Precio del producto, Debe ser tipo string"
         },
-        id_Compra: {
+        fk_Compra: {
           bsonType: "string",
           description: "Id de la compra. Debe ser tipo string"
         },
-        id_Producto: {
+        fk_Producto: {
           bsonType: "string",
           description: "Id del producto. Debe ser tipo string"
         }
@@ -192,3 +193,4 @@ db.createCollection("detalle_compra", {
   }
 }
 )
+
